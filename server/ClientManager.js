@@ -8,6 +8,7 @@ module.exports = function () {
     clients.set(client.id, { client })
   }
 
+  // 接続済のユーザーをclientsに登録
   function registerClient(client, user) {
     clients.set(client.id, { client, user })
   }
@@ -16,6 +17,7 @@ module.exports = function () {
     clients.delete(client.id)
   }
 
+  // 未接続のユーザーのjsonを返す
   function getAvailableUsers() {
     const usersTaken = new Set(
       Array.from(clients.values())
@@ -26,12 +28,9 @@ module.exports = function () {
       .filter(u => !usersTaken.has(u.name))
   }
 
-  function isUserAvailable(userName) {
-    return getAvailableUsers().some(u => u.name === userName)
-  }
-
+  // 選択ユーザー情報を返す
   function getUserByName(userName) {
-    return userTemplates.find(u => u.name === userName)
+    return { name: userName, lastName: '', statusText: '', image: 'users/rick.jpg' }
   }
 
   function getUserByClientId(clientId) {
@@ -43,7 +42,6 @@ module.exports = function () {
     registerClient,
     removeClient,
     getAvailableUsers,
-    isUserAvailable,
     getUserByName,
     getUserByClientId
   }

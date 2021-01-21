@@ -21,7 +21,7 @@ io.on('connection', function (client) {
 
   console.log('client connected...', client.id)
   clientManager.addClient(client)
-
+  // reading済
   client.on('register', handleRegister)
 
   client.on('join', handleJoin)
@@ -31,7 +31,7 @@ io.on('connection', function (client) {
   client.on('message', handleMessage)
 
   client.on('chatrooms', handleGetChatrooms)
-
+  // reading済
   client.on('availableUsers', handleGetAvailableUsers)
 
   client.on('disconnect', function () {
